@@ -1,7 +1,13 @@
 # ID-ENTUTA / SAFEIDENDURANCE — projetos móveis
 
-Estado: **base nativa para desenvolvimento e homologação, ainda não compilada,
-assinada ou pronta para submissão**. Não contém IPA, APK ou AAB.
+Estado: **compilação Android e iOS para simulador aprovada em CI; ainda sem
+assinatura de distribuição e sem submissão às lojas**. Os fontes não incluem binários.
+
+Build validado: https://github.com/eduramoshd1/sprint2/actions/runs/40373245809
+Artefatos: APK Android de depuração, AAB sem assinatura e aplicativo iOS para
+simulador. O app de simulador não instala em iPhone. Os artefatos desse build
+expiram em 02/11/2026. O portal definitivo `/atleta` retornou HTTP 404 na
+verificação de 26/10/2026 e precisa ser implantado antes de testar esses pacotes.
 
 Os projetos preservam o aplicativo web do Sprint 2 dentro de WKWebView (iOS)
 e WebView (Android), com navegação nativa, atualização, mensagem de falha de conexão
@@ -43,7 +49,8 @@ Não há upload automático para lojas.
 Os artefatos são APK de depuração (instalável para testes Android), AAB ainda sem
 assinatura de distribuição e app de simulador iOS. O artefato do simulador NÃO
 instala em iPhone e NÃO é um IPA de TestFlight. A compilação remota ainda não
-foi executada. O repositório de destino precisa ser informado.
+está configurada em `https://github.com/eduramoshd1/sprint2`.
+O workflow também inicia ao alterar os projetos ou seu próprio arquivo na branch main.
 
 Para produzir IPA/TestFlight depois da primeira compilação, será necessário
 configurar equipe Apple, certificado de distribuição e perfil, ou assinatura
@@ -71,8 +78,8 @@ xcodebuild -project IDEntuta.xcodeproj -scheme IDEntuta -sdk iphonesimulator COD
 
 ## Pendências obrigatórias antes de enviar às lojas
 
-1. Compilar ambos os projetos e testar em aparelhos reais; estes fontes não
-   foram compilados no ambiente Windows atual, que não possui SDK Android/Xcode.
+1. Testar em aparelhos reais; os projetos compilaram no GitHub Actions,
+   sem SDK Android/Xcode no ambiente Windows local.
 2. Confirmar endereço, identificadores, contas das lojas, certificados e assinatura.
 3. Homologar login, logout, retorno do segundo plano, QR e download/compartilhamento,
    troca de senha, cadastro, WhatsApp, recuperação de conexão e navegação externa.
@@ -105,3 +112,4 @@ xcodebuild -project IDEntuta.xcodeproj -scheme IDEntuta -sdk iphonesimulator COD
 Para contas pessoais novas no Google Play, verifique a exigência de teste fechado
 com pelo menos 12 participantes por 14 dias consecutivos antes de pedir acesso
 à produção. A regra depende do tipo e da data da conta.
+
