@@ -1,6 +1,9 @@
 # Direitos autorais
 
-© 2026 ID-ENTUTA e SAFEIDENDURANCE. Todos os direitos reservados.
+© 2026 ERVCTDI. Todos os direitos reservados ao desenvolvedor.
+
+Desenvolvedor: ERVCTDI.
+Aplicativo: ID-ENTUTA · SAFEIDENDURANCE.
 
 Este aviso acompanha o aplicativo, a identidade visual e os materiais próprios
 de distribuição do ID-ENTUTA e SAFEIDENDURANCE. A disponibilização dos fontes
