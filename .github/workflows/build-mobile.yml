@@ -1,0 +1,67 @@
+name: Compilar apps de homologação
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['android/**', 'ios/**', '.github/workflows/build-mobile.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - name: Instalar SDK
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
+      - name: Compilar APK de teste e bundle sem assinatura de distribuição
+        run: gradle :app:assembleDebug :app:bundleRelease --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-homologacao
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+          retention-days: 7
+
+  ios:
+    runs-on: macos-26
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ios
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar projeto Xcode
+        run: |
+          command -v xcodegen || brew install xcodegen
+          xcodegen generate
+      - name: Compilar para simulador, sem certificado
+        run: >-
+          xcodebuild -project IDEntuta.xcodeproj -scheme IDEntuta
+          -configuration Debug -sdk iphonesimulator
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Empacotar app do simulador
+        run: ditto -c -k --sequesterRsrc --keepParent build/Build/Products/Debug-iphonesimulator/IDEntuta.app ios-simulador.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulador-nao-instala-no-iphone
+          path: ios/ios-simulador.zip
+          if-no-files-found: error
+          retention-days: 7

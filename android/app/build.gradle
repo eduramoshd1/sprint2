@@ -1,0 +1,23 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.safeidendurance.atleta'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'com.safeidendurance.atleta'
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+        // Confirmar domínio e identificador antes de assinar a primeira versão.
+        buildConfigField 'String', 'PORTAL_URL', '"https://www.safeidendurance.com/atleta"'
+    }
+    buildFeatures { buildConfig true }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

@@ -1,0 +1,23 @@
+name: IDEntuta
+options:
+  bundleIdPrefix: com.safeidendurance
+  deploymentTarget:
+    iOS: '16.0'
+targets:
+  IDEntuta:
+    type: application
+    platform: iOS
+    sources: [Sources]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.safeidendurance.atleta
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        SWIFT_VERSION: '5.0'
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: ID-ENTUTA
+        INFOPLIST_KEY_PortalURL: https://www.safeidendurance.com/atleta
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: '1,2'
+        CODE_SIGN_STYLE: Automatic
